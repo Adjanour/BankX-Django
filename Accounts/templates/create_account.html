@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create an Account</h1>
+
+{% if form.errors %}
+<p>There were some errors with your form submission. Please correct the errors and try again.</p>
+{% endif %}
+
+<form action="/create_account" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Create Account">
+</form>
+{% endblock %}
