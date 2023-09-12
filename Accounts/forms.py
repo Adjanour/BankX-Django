@@ -45,3 +45,14 @@ class WithdrawalForm(forms.Form):
         max_length=4,  # Set a maximum PIN length
         required=True
     )
+
+class AccountCreationForm(forms.Form):
+    username = forms.CharField(max_length=255, label="Username")
+    account_type = forms.ChoiceField(choices=[('Savings', 'Savings'), ('Current', 'Current'), ('Student', 'Student')], label="Account type")
+    initial_deposit = forms.DecimalField(max_digits=10, decimal_places=2, label="Initial deposit (optional)")
+    account_pin = forms.CharField(max_length=4, label="PIN")
+    email = forms.EmailField(max_length=255, label="Email")
+    password = forms.CharField(max_length=255, label="Password", widget=forms.PasswordInput)
+    first_name = forms.CharField(max_length=255, label="First name")
+    last_name = forms.CharField(max_length=255, label="Last name")
+    age = forms.IntegerField(label="Age")
