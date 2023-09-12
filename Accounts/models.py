@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User  # Import Django's built-in User model
+from django.contrib.auth.models import AbstractUser
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link the account to a user
@@ -58,6 +59,19 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+class User(models.Model):
+    # Add your custom fields here.
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    age = models.PositiveIntegerField()
+    username = models.CharField(max_length=255, unique=True)
+    password = models.CharField(max_length=255,default='password')
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
     
 class Employee(models.Model):
     name = models.CharField(max_length=100)
