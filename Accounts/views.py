@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, AccountCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Account 
+from .models import Account,User
 
 
 def signup(request):
@@ -13,23 +13,22 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}. You can now log in.')
-            return redirect('login')
+            return redirect('create_account')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+        
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome back, {username}!')
                 return redirect('account_overview')
-            else:
+        else:
                 messages.error(request, 'Invalid username or password. Please try again.')
     else:
         form = LoginForm()
@@ -45,6 +44,33 @@ def logout_view(request):
 def index(request):
     return render(request, 'index.html')
 
+def create_account(request):
+    if request.method == 'POST':
+        # Save the form data to the database.
+        user = User.objects.create(
+            username=request.POST['username'],
+            email=request.POST['email'],
+            password=request.POST['password'],
+            first_name=request.POST['first_name'],
+            last_name=request.POST['last_name'],
+            age=request.POST['age'],
+        )
+
+        account = Account.objects.create(
+            user=user,
+            account_type=request.POST['account_type'],
+            initial_deposit=request.POST['initial_deposit'],
+            account_pin=request.POST['account_pin'],
+            account_balance=request.POST['initial_deposit'],
+        )
+
+        # Redirect the user to the success page.
+        return redirect('success')
+
+    else:
+        form = AccountCreationForm(request.POST)
+        # Render the form with errors.
+        return render(request, 'create_account.html', {'form': form})
 
 
 @login_required
