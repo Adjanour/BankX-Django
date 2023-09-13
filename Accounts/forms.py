@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username','email','password1', 'password2',]
 
 class LoginForm(AuthenticationForm):
     class Meta:
@@ -47,12 +47,8 @@ class WithdrawalForm(forms.Form):
     )
 
 class AccountCreationForm(forms.Form):
-    username = forms.CharField(max_length=255, label="Username")
     account_type = forms.ChoiceField(choices=[('Savings', 'Savings'), ('Current', 'Current'), ('Student', 'Student')], label="Account type")
     initial_deposit = forms.DecimalField(max_digits=10, decimal_places=2, label="Initial deposit (optional)")
     account_pin = forms.CharField(max_length=4, label="PIN")
-    email = forms.EmailField(max_length=255, label="Email")
-    password = forms.CharField(max_length=255, label="Password", widget=forms.PasswordInput)
-    first_name = forms.CharField(max_length=255, label="First name")
-    last_name = forms.CharField(max_length=255, label="Last name")
-    age = forms.IntegerField(label="Age")
+    
+    
