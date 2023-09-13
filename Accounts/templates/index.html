@@ -4,12 +4,7 @@
 {% block content %}
     <header class="bg-primary text-white p-4">
         <h1 class="text-center">Welcome to Salem Bank</h1>
-        <nav class="text-center">
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="{% url 'login' %}" class="text-white">Login</a></li>
-                <li class="list-inline-item"><a href="{% url 'signup' %}" class="text-white">Sign Up</a></li>
-            </ul>
-        </nav>
+        
     </header>
 
     <section class="container mt-4">
@@ -19,5 +14,11 @@
             <li class="list-group-item"><a href="{% url 'deposit' %}">Deposit Money</a></li>
             <li class="list-group-item"><a href="{% url 'withdraw' %}">Withdraw Money</a></li>
         </ul>
-    </section>
+    </section><br>
+    <nav class="text-center">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a class="btn btn-primary" href="{% url 'login' %}" class="text-white">Login</a></li>
+            <li class="list-inline-item"><a class="btn btn-primary" href="{% url 'signup' %}" class="text-white">Sign Up</a></li>
+        </ul>
+    </nav>
 {% endblock %}
