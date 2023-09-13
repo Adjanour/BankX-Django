@@ -13,4 +13,5 @@ urlpatterns = [
     path('withdraw/', views.withdraw, name='withdraw'),
     path('delete_account/', views.delete_account, name='delete_account'),
     path('list_accounts/', views.list_accounts, name='list_accounts'),
+    path('error_message/', views.error_message, name='error_page'),
 ]

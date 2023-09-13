@@ -21,19 +21,23 @@ def signup(request):
 
 def login_view(request):
     if request.method == 'POST':
-        
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome back, {username}!')
-                return redirect('create_account')
+                accounts = Account.objects.all()
+                for account in accounts:
+                    if user == account.user:
+                        return redirect('account_overview')
+                    else:
+                        return redirect('create_account')
         else:
-                messages.error(request, 'Invalid username or password. Please try again.')
+           return redirect('error_page')
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
@@ -105,3 +109,6 @@ def list_accounts(request):
     context = {'accounts': account}
     return render(request, 'accounts.html', context)
 
+def error_message(request):
+    context = {'error_message':"Login Error"}
+    return render(request,'error_page.html',context)
