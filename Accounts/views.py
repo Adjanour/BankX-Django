@@ -99,3 +99,9 @@ def generate_id():
     unique_id = uuid.uuid4()
     id_str = str(unique_id)
     return id_str
+
+def list_accounts(request):
+    account = Account.objects.all()
+    context = {'accounts': account}
+    return render(request, 'accounts.html', context)
+
