@@ -26,13 +26,13 @@ Follow these instructions to set up and run the project on your local machine.
 1. Clone the repository to your local machine.
 
    ```bash
-   git clone https://github.com/yourusername/salem-bank.git
+   git clone https://github.com/Adjanour/BankX.git
     ```
 
 2. Navigate to the project directory.
 
    ```bash
-   cd salem-bank
+   cd BankX
    ```
 
 3. Create a virtual environment and activate it (optional but recommended).
