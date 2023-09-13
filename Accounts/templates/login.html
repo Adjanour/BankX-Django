@@ -2,11 +2,21 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Login to Salem Bank</h1>
+    <h1 style="margin:auto;">Login to Salem Bank</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <table class="table">
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+            </table>
+        <div style="margin:auto; width:fit-content;"> <button  type="submit" class="btn btn-primary">Login</button></div>
+        
     </form>
     <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
 </div>
