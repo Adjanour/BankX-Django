@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container">
     <h2>Withdraw Money</h2>
-    <form method="post">
+    <form action="/withdraw" method="post">
       {% csrf_token %}
       <div class="form-group">
         <label for="amount">Amount to Withdraw:</label>
