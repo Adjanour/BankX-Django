@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Transaction History</h1>
+
+    {% for transaction in transactions %}
+    <div class = "sub-container">
+        <ul>
+            <li>
+            <strong> Date: </strong> {{ transaction.transaction_date }}<br> 
+            <strong> Amount: </strong> {{ transaction.amount }}<br>
+                <strong> Type: </strong> {{ transaction.transaction_type }}<br>
+            </li>
+        </ul>
+    </div><br>
+    {% endfor %}
+
+{% endblock %}
