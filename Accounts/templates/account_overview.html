@@ -8,9 +8,10 @@
     <p><strong>Account Type:</strong><label class="form-control"> {{ account.account_type }}</label></p>
     <p><strong>Account Balance:</strong><label class="form-control"> ${{ account.account_balance }}</label></p>
     
-    {% comment %} <a href="{% url 'deposit' account.account_no %}" class="btn btn-primary">Deposit Money</a>
-    <a href="{% url 'withdraw' account.account_no %}" class="btn btn-primary">Withdraw Money</a>
-    <a href="{% url 'delete_account' account.account_no %}" class="btn btn-danger">Delete Account</a>
- {% endcomment %}
+    <a href="{% url 'deposit'  %}" class="btn btn-primary">Deposit Money</a>
+    <a href="{% url 'withdraw' %}" class="btn btn-primary">Withdraw Money</a>
+    <a href="{% url 'delete_account' %}" class="btn btn-danger">Delete Account</a>
+    <a href="{% url 'transaction-list' %}" class="btn btn-primary">View Transaction History</a>
+
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salem Bank</title>
@@ -28,9 +28,9 @@
                     <a class="nav-link" href="{% url 'list_accounts' %}">Accounts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Transactions</a>
+                    <a class="nav-link" href="">Transactions</a>
                 </li>
-               
+
             </ul>
         </div>
     </nav>
@@ -40,37 +40,31 @@
                 <br>
                 <a class="" href="#">
                     <img src="{% static 'favicon.ico' %}" width="50" height="50" class="d-inline-block align-top" alt="Logo">
-                    <h1 class="title" style="margin-top: 5px; font-size: large;"> Salem Server</h1>
+                    <h1 class="title" style="margin-top: 5px; font-size: large;"> Salem Bank</h1>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'index' %}">
                     <span class="icon"><i class="fa fa-home"></i></span>
                     <span class="title">Homepage</span>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'account_overview' %}">
                     <span class="icon"><i class="fa fa-user"></i></span>
-                    <span class="title">Contacts</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <span class="icon"><i class="fa fa-envelope"></i></span>
-                    <span class="title">SMS</span>
+                    <span class="title">Account Overview</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="icon"><i class="fa fa-heart"></i></span>
-                    <span class="title">Template</span>
+                    <span class="title">Transactions</span>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'list_accounts' %}">
                     <span class="icon"><i class="fa fa-lock"></i></span>
-                    <span class="title">Security and Account</span>
+                    <span class="title">Accounts</span>
                 </a>
             </li>
             <li>
@@ -100,7 +94,7 @@
                 </span>
             </div>
         </div>
-    
+
         <div class="container">
             {% block content %}
             <!-- Content of child templates will be inserted here -->
@@ -109,13 +103,13 @@
     <div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
-    <script src="{% static 'js/main.js' %}"></script> 
-    <script src="{% static 'js/main2.js' %}"></script> 
-    <script src="{% static 'js/script.js' %}"></script> 
-    <script src="{% static 'js/bootstrap.js' %}"></script> 
-    <script src="{% static 'js/getdate.js' %}"></script> 
-    <script src="{% static 'js/clock.js' %}"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main2.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/getdate.js' %}"></script>
+    <script src="{% static 'js/clock.js' %}"></script>
 
 </body>
 </html>

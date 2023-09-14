@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import SignUpForm, LoginForm, AccountCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Account
+from .models import Transaction
 import uuid
 
 
@@ -82,15 +83,45 @@ def account_overview(request):
 def deposit(request):
     if request.method == 'POST':
         # Handle deposit logic here (update account balance)
-        return redirect('account_overview')
-    return render(request, 'deposit.html')
+        user = request.user
+        account = Account.objects.get(user=user)
+        deposit_amount= request.POST['amount']
+        pin = request.POST['pin']
+        if int(pin) == account.account_pin:
+            account.account_balance += int(deposit_amount)
+            account.save()
+            transaction = Transaction.objects.create(
+                account = account,
+                amount = int(deposit_amount),
+                transaction_type = "Deposit",
+            )
+            return redirect('account_overview')
+        else:
+            return redirect('error_page')
+    else:
+        return render(request, 'deposit.html')
 
 @login_required
 def withdraw(request):
     if request.method == 'POST':
         # Handle withdrawal logic here (update account balance)
-        return redirect('account_overview')
-    return render(request, 'withdraw.html')
+        user = request.user
+        account = Account.objects.get(user=user)
+        withdrawal_amount= request.POST['amount']
+        pin = request.POST['pin']
+        if int(pin) == account.account_pin:
+            account.account_balance -= int(withdrawal_amount)
+            account.save()
+            transaction = Transaction.objects.create(
+                account = account,
+                amount = int(withdrawal_amount),
+                transaction_type = "Withdrawal"
+            )
+            return redirect('account_overview')
+        else:
+            return redirect('error_page')
+    else:
+        return render(request, 'withdraw.html')
 
 @login_required
 def delete_account(request):
@@ -112,3 +143,8 @@ def list_accounts(request):
 def error_message(request):
     context = {'error_message':"Login Error"}
     return render(request,'error_page.html',context)
+
+def TransactionListView(request):
+    transaction = Transaction.objects.all()
+    context = {'transactions': transaction}
+    return render(request, 'transaction_list.html', context)
